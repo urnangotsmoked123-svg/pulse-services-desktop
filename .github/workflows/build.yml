@@ -1,0 +1,40 @@
+name: Build Windows Portable EXE (Tauri)
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          target: x86_64-pc-windows-msvc
+          override: true
+
+      - name: Install frontend deps
+        run: npm install
+
+      - name: Build Tauri portable exe
+        run: |
+          npm run tauri build -- --bundles none
+
+      - name: Upload portable exe
+        uses: actions/upload-artifact@v3
+        with:
+          name: pulse-windows-portable
+          path: src-tauri/target/release/*.exe
