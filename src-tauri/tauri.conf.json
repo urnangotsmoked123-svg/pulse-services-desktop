@@ -1,0 +1,32 @@
+{
+  "build": {
+    "beforeBuildCommand": "",
+    "beforeDevCommand": "",
+    "devPath": "http://localhost:5173",
+    "distDir": "../dist"
+  },
+  "package": {
+    "productName": "Pulse Services",
+    "version": "0.0.1"
+  },
+  "tauri": {
+    "windows": [
+      {
+        "title": "Pulse Services",
+        "width": 1127,
+        "height": 644,
+        "resizable": true,
+        "decorations": true
+      }
+    ],
+    "bundle": {
+      "active": true,
+      "targets": "all",
+      "identifier": "com.pulse.services"
+    },
+    "allowlist": {},
+    "security": {
+      "csp": null
+    }
+  }
+}
